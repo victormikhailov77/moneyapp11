@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "5006e703-b06e-4bc4-b027-c997f4b2644d",
+		"name": "Spring Rest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8085/transfer/f0984cf5-dd3e-42eb-97d3-7661bbe68d1e",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ3bmVUeTg4SE5wd0NIS0JvR19FOEdmd2hRSmxDd1BOcDBZTHY0R1JxNWJzIn0.eyJqdGkiOiJkMTAxZjUyNC0zZmJlLTRmYjQtOWZmNy03MjA2ZmNiZmM4ZjQiLCJleHAiOjE1NjkyODU3NzksIm5iZiI6MCwiaWF0IjoxNTY5Mjg1NDc5LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvYXV0aC9yZWFsbXMvZGV2IiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjllNTc4ODI2LTk4ZTctNDUwNi1hZjljLTI0MGExNDhiNThjOCIsInR5cCI6IkJlYXJlciIsImF6cCI6InRyYW5zZmVyLXNlcnZpY2UiLCJhdXRoX3RpbWUiOjE1NjkyODQ1NzksInNlc3Npb25fc3RhdGUiOiI3OGIxYjNjYS02OGQwLTQ2MmQtOWRjNy0xZmNlZDgzMmEzOTMiLCJhY3IiOiIwIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX0sInRyYW5zZmVyLXNlcnZpY2UiOnsicm9sZXMiOlsiVVNFUiJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInVzZXJfbmFtZSI6IndhbHRlciIsIm5hbWUiOiJXYWx0ZXIgV2hpdGUiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ3YWx0ZXIiLCJnaXZlbl9uYW1lIjoiV2FsdGVyIiwiZmFtaWx5X25hbWUiOiJXaGl0ZSJ9.pBepZGjjT3Hxs8zncRqq7Um250VCs5a0VLlxD48K6126M9tZ79Wbetu3E75Q-sFveQZfOhop3TmUH1c3McdB-FUAGWSJg7k-P8Pc9TnFfO0DqnagNz3vlQQwFsWE22n-CKjMC-WiFhb-q6wqJ7syTJRypaM1KqiUgK0qafxeUs3xEgKSPHunWaOjHfB1tVwOMeMs0oKVkApgQo16OukaHBkeOoQVw-v1zwq-TXZLfwuZOpnUia48aPApDo3B4MhrsVRblsyqXy5e8AhhgZsl-C_20ZGkiGtcfBAIACB3v95sYBbnHDcehU-u2AGoHJ4lcPFQ8l0vyTwBFOilqqUQuQ",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8085/transfer/f0984cf5-dd3e-42eb-97d3-7661bbe68d1e",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"transfer",
+						"f0984cf5-dd3e-42eb-97d3-7661bbe68d1e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8085/transfer/f0984cf5-dd3e-42eb-97d3-7661bbe68d1e Copy",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ3bmVUeTg4SE5wd0NIS0JvR19FOEdmd2hRSmxDd1BOcDBZTHY0R1JxNWJzIn0.eyJqdGkiOiJkMTAxZjUyNC0zZmJlLTRmYjQtOWZmNy03MjA2ZmNiZmM4ZjQiLCJleHAiOjE1NjkyODU3NzksIm5iZiI6MCwiaWF0IjoxNTY5Mjg1NDc5LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvYXV0aC9yZWFsbXMvZGV2IiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjllNTc4ODI2LTk4ZTctNDUwNi1hZjljLTI0MGExNDhiNThjOCIsInR5cCI6IkJlYXJlciIsImF6cCI6InRyYW5zZmVyLXNlcnZpY2UiLCJhdXRoX3RpbWUiOjE1NjkyODQ1NzksInNlc3Npb25fc3RhdGUiOiI3OGIxYjNjYS02OGQwLTQ2MmQtOWRjNy0xZmNlZDgzMmEzOTMiLCJhY3IiOiIwIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX0sInRyYW5zZmVyLXNlcnZpY2UiOnsicm9sZXMiOlsiVVNFUiJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInVzZXJfbmFtZSI6IndhbHRlciIsIm5hbWUiOiJXYWx0ZXIgV2hpdGUiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ3YWx0ZXIiLCJnaXZlbl9uYW1lIjoiV2FsdGVyIiwiZmFtaWx5X25hbWUiOiJXaGl0ZSJ9.pBepZGjjT3Hxs8zncRqq7Um250VCs5a0VLlxD48K6126M9tZ79Wbetu3E75Q-sFveQZfOhop3TmUH1c3McdB-FUAGWSJg7k-P8Pc9TnFfO0DqnagNz3vlQQwFsWE22n-CKjMC-WiFhb-q6wqJ7syTJRypaM1KqiUgK0qafxeUs3xEgKSPHunWaOjHfB1tVwOMeMs0oKVkApgQo16OukaHBkeOoQVw-v1zwq-TXZLfwuZOpnUia48aPApDo3B4MhrsVRblsyqXy5e8AhhgZsl-C_20ZGkiGtcfBAIACB3v95sYBbnHDcehU-u2AGoHJ4lcPFQ8l0vyTwBFOilqqUQuQ",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8085/transfer/f0984cf5-dd3e-42eb-97d3-7661bbe68d1e",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"transfer",
+						"f0984cf5-dd3e-42eb-97d3-7661bbe68d1e"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
