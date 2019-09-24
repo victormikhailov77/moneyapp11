@@ -1,5 +1,6 @@
 package org.fastpay.service;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.Optional;
 // in real life scenario, should be wrapper around bank API
 // Revolut - cocksuckers!
 @Service
+@Log4j2
 public class AccountServiceImpl implements AccountService {
 
     private final Map<String, BigDecimal> accountStorage = new HashMap<>(); // current balance, per account nr
@@ -36,11 +38,13 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public PaymentStatus authorizePayment(String source, String destination, BigDecimal amount, String currency, String txId) {
         if (!accountStorage.containsKey(source)) {
+            log.error("Account {} locked or not exist", source);
             return PaymentStatus.INVALID_ACCOUNT; // account locked or not exist
         }
 
         if (balance(source, currency).compareTo(amount) == -1) {
             // insufficient funds
+            log.error("Account {} doesn't have sufficient funds", source);
             return PaymentStatus.DECLINED;
         }
         BigDecimal originBalance = accountStorage.get(source);
