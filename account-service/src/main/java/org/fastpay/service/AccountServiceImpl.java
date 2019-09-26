@@ -99,9 +99,8 @@ public class AccountServiceImpl implements AccountService {
             return PaymentStatus.ERROR; // must be authorized first
         }
 
-        String destinationAccount = bufferStorage.get(txId).getFirst();
-        BigDecimal depositAmount = bufferStorage.get(txId).getSecond();
-        return deposit(destinationAccount, depositAmount, "same", txId);
+        transactions.put(txId, Pair.of(transactions.get(txId).getFirst(), PaymentStatus.COMPLETED));
+        return PaymentStatus.COMPLETED;
     }
 
     @Override
