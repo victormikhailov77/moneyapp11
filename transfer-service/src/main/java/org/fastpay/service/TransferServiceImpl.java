@@ -25,13 +25,6 @@ public class TransferServiceImpl implements TransferService {
 
     public TransferServiceImpl() {}
 
-//    public TransferServiceImpl(TransferRepository repository, AccountService senderAccountService,
-//                               AccountService recipientAccountService) {
-//        this.repository = repository;
-//        this.senderAccountService = senderAccountService;
-//        this.recipientAccountService = recipientAccountService;
-//    }
-
     @Override
     public Transfer createTransfer(TransferDto transferData) {
 
