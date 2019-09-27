@@ -1,12 +1,32 @@
 import React, {Component} from 'react'
 import ApiService from "../../service/ApiService";
+import {withStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+//import TableRow from '@material-ui/core/TableRow';
+import {TableRow} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+
+const StyledTableCell = withStyles(theme => ({
+    head: {
+        color: theme.palette.common.black,
+        backgroundColor: theme.palette.common.white,
+    },
+    body: {
+        fontSize: 14,
+    },
+}))(TableCell);
+
+const StyledTableRow = withStyles(theme => ({
+    root: {
+        '&:nth-of-type(odd)': {
+            backgroundColor: theme.palette.background.default,
+        },
+    },
+}))(TableRow);
 
 class ListTransfersComponent extends Component {
 
@@ -26,9 +46,11 @@ class ListTransfersComponent extends Component {
         this.reloadTransferList();
     }
 
-    componentDidUpdate() {
-        this.reloadTransferList();
-    }
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     if(this.props.id !== prevProps.id) {
+    //         this.reloadTransferList();
+    //     }
+    // }
 
     reloadTransferList() {
         ApiService.fetchTransfers()
@@ -64,42 +86,44 @@ class ListTransfersComponent extends Component {
                 <Table size={"small"}>
                     <TableHead>
                         <TableRow>
-                            <TableCell align="left">Tx Id</TableCell>
-                            <TableCell align="left">Source</TableCell>
-                            <TableCell align="left">Destination</TableCell>
-                            <TableCell align="right">Amount</TableCell>
-                            <TableCell align="left">Currency</TableCell>
-                            <TableCell align="left">Title</TableCell>
-                            <TableCell align="left">Timestamp</TableCell>
-                            <TableCell align="left">Status</TableCell>
-                            <TableCell align="right"></TableCell>
-                            <TableCell align="right"></TableCell>
+                            <StyledTableCell>Tx Id</StyledTableCell>
+                            <StyledTableCell>Source</StyledTableCell>
+                            <StyledTableCell>Destination</StyledTableCell>
+                            <StyledTableCell align={"right"}>Amount</StyledTableCell>
+                            <StyledTableCell>Currency</StyledTableCell>
+                            <StyledTableCell>Title</StyledTableCell>
+                            <StyledTableCell>Timestamp</StyledTableCell>
+                            <StyledTableCell>Status</StyledTableCell>
+                            <StyledTableCell> </StyledTableCell>
+                            <StyledTableCell> </StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {
                             this.state.transfers && this.state.transfers.map(
                                 transfer =>
-                                    <TableRow key={transfer.id}>
-                                        <TableCell align="left" component="th" scope="row">
+                                    <StyledTableRow key={transfer.id}>
+                                        <StyledTableCell align="left" component="th" scope="row">
                                             {transfer.id}
-                                        </TableCell>
-                                        <TableCell align="left">{transfer.source}</TableCell>
-                                        <TableCell align="left">{transfer.destination}</TableCell>
-                                        <TableCell align="right">{transfer.amount}</TableCell>
-                                        <TableCell>{transfer.currency}</TableCell>
-                                        <TableCell align="left">{transfer.title}</TableCell>
-                                        <TableCell align="left">{transfer.timestamp}</TableCell>
-                                        <TableCell align="left">{transfer.status}</TableCell>
-                                        <TableCell align="right">
-                                            <Button size="small" disabled={transfer.status !== "PENDING"} variant="contained" color="primary"
+                                        </StyledTableCell>
+                                        <StyledTableCell align="left">{transfer.source}</StyledTableCell>
+                                        <StyledTableCell align="left">{transfer.destination}</StyledTableCell>
+                                        <StyledTableCell align="right">{transfer.amount}</StyledTableCell>
+                                        <StyledTableCell>{transfer.currency}</StyledTableCell>
+                                        <StyledTableCell align="left">{transfer.title}</StyledTableCell>
+                                        <StyledTableCell align="left">{transfer.timestamp}</StyledTableCell>
+                                        <StyledTableCell align="left">{transfer.status}</StyledTableCell>
+                                        <StyledTableCell align="right">
+                                            <Button size="small" disabled={transfer.status !== "PENDING"}
+                                                    variant="contained" color="primary"
                                                     onClick={() => this.executeTransfer(transfer.id)}>Execute</Button>
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            <Button size="small" disabled={transfer.status !== "PENDING"} variant="contained" color="secondary"
+                                        </StyledTableCell>
+                                        <StyledTableCell align="right">
+                                            <Button size="small" disabled={transfer.status !== "PENDING"}
+                                                    variant="contained" color="secondary"
                                                     onClick={() => this.cancelTransfer(transfer.id)}>Cancel</Button>
-                                        </TableCell>
-                                    </TableRow>
+                                        </StyledTableCell>
+                                    </StyledTableRow>
                             )
                         }
                     </TableBody>
