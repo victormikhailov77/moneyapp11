@@ -17,7 +17,7 @@ class ApiService {
     }
 
     createTransfer(user) {
-        return axios.post(""+USER_API_BASE_URL, user);
+        return axios.post("" + USER_API_BASE_URL, user);
     }
 
     executeTransfer(txId) {

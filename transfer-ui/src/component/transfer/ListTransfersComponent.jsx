@@ -1,5 +1,12 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import ApiService from "../../service/ApiService";
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 class ListTransfersComponent extends Component {
 
@@ -19,24 +26,28 @@ class ListTransfersComponent extends Component {
         this.reloadTransferList();
     }
 
+    componentDidUpdate() {
+        this.reloadTransferList();
+    }
+
     reloadTransferList() {
         ApiService.fetchTransfers()
             .then((res) => {
-                    this.setState({transfers: res.data.result})
+                this.setState({transfers: res.data});
             });
     }
 
     cancelTransfer(id) {
         ApiService.cancelTransfer(id)
-           .then(res => {
-               this.setState({message : 'Transfer cancelled successfully.'});
-           })
+            .then(res => {
+                this.setState({message: 'Transfer cancelled successfully.'});
+            })
     }
 
     executeTransfer(id) {
         ApiService.executeTransfer(id)
             .then(res => {
-                this.setState({message : 'Transfer completed successfully.'});
+                this.setState({message: 'Transfer completed successfully.'});
             })
     }
 
@@ -48,47 +59,61 @@ class ListTransfersComponent extends Component {
     render() {
         return (
             <div>
-                <h2 className="text-center">Transfer Details</h2>
-                <button className="btn btn-danger" style={{width:'100px'}} onClick={() => this.createTransfer()}> Add User</button>
-                <table className="table table-striped">
-                    <thead>
-                        <tr>
-                            <th className="hidden">Id</th>
-                            <th>Source</th>
-                            <th>Destination</th>
-                            <th>Amount</th>
-                            <th>Currency</th>
-                            <th>Title</th>
-                            <th>Timestamp</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <Typography variant="h5" style={style}>Transfers history</Typography>
+                <Button variant="contained" color="primary" onClick={() => this.createTransfer()}> New transfer</Button>
+                <Table size={"small"}>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell align="left">Tx Id</TableCell>
+                            <TableCell align="left">Source</TableCell>
+                            <TableCell align="left">Destination</TableCell>
+                            <TableCell align="right">Amount</TableCell>
+                            <TableCell align="left">Currency</TableCell>
+                            <TableCell align="left">Title</TableCell>
+                            <TableCell align="left">Timestamp</TableCell>
+                            <TableCell align="left">Status</TableCell>
+                            <TableCell align="right"></TableCell>
+                            <TableCell align="right"></TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
                         {
-                            this.state.transfers.map(
-                        transfer =>
-                                    <tr key={transfer.id}>
-                                        <td>{transfer.source}</td>
-                                        <td>{transfer.destination}</td>
-                                        <td>{transfer.amount}</td>
-                                        <td>{transfer.currency}</td>
-                                        <td>{transfer.title}</td>
-                                        <td>{transfer.timestamp}</td>
-                                        <td>{transfer.status}</td>
-                                        <td>
-                                            <button className="btn btn-success" onClick={() => this.executeTransfer(transfer.id)} style={{marginLeft: '20px'}}> Complete</button>
-                                            <button className="btn btn-success" onClick={() => this.cancelTransfer(transfer.id)}> Cancel</button>
-                                        </td>
-                                    </tr>
+                            this.state.transfers && this.state.transfers.map(
+                                transfer =>
+                                    <TableRow key={transfer.id}>
+                                        <TableCell align="left" component="th" scope="row">
+                                            {transfer.id}
+                                        </TableCell>
+                                        <TableCell align="left">{transfer.source}</TableCell>
+                                        <TableCell align="left">{transfer.destination}</TableCell>
+                                        <TableCell align="right">{transfer.amount}</TableCell>
+                                        <TableCell>{transfer.currency}</TableCell>
+                                        <TableCell align="left">{transfer.title}</TableCell>
+                                        <TableCell align="left">{transfer.timestamp}</TableCell>
+                                        <TableCell align="left">{transfer.status}</TableCell>
+                                        <TableCell align="right">
+                                            <Button size="small" disabled={transfer.status !== "PENDING"} variant="contained" color="primary"
+                                                    onClick={() => this.executeTransfer(transfer.id)}>Execute</Button>
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            <Button size="small" disabled={transfer.status !== "PENDING"} variant="contained" color="secondary"
+                                                    onClick={() => this.cancelTransfer(transfer.id)}>Cancel</Button>
+                                        </TableCell>
+                                    </TableRow>
                             )
                         }
-                    </tbody>
-                </table>
+                    </TableBody>
+                </Table>
 
             </div>
         );
     }
 
+}
+
+const style = {
+    display: 'flex',
+    justifyContent: 'center'
 }
 
 export default ListTransfersComponent;
