@@ -30,6 +30,8 @@ const StyledTableRow = withStyles(theme => ({
 
 class ListTransfersComponent extends Component {
 
+    interval = null;
+
     constructor(props) {
         super(props)
         this.state = {
@@ -43,14 +45,13 @@ class ListTransfersComponent extends Component {
     }
 
     componentDidMount() {
+        this.interval = setInterval(this.reloadTransferList, 5000);
         this.reloadTransferList();
     }
 
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     if(this.props.id !== prevProps.id) {
-    //         this.reloadTransferList();
-    //     }
-    // }
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
 
     reloadTransferList() {
         ApiService.fetchTransfers()
@@ -63,14 +64,16 @@ class ListTransfersComponent extends Component {
         ApiService.cancelTransfer(id)
             .then(res => {
                 this.setState({message: 'Transfer cancelled successfully.'});
-            })
+            });
+        this.forceUpdate();
     }
 
     executeTransfer(id) {
         ApiService.executeTransfer(id)
             .then(res => {
                 this.setState({message: 'Transfer completed successfully.'});
-            })
+            });
+        this.forceUpdate();
     }
 
     createTransfer() {
@@ -86,16 +89,16 @@ class ListTransfersComponent extends Component {
                 <Table size={"small"}>
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell>Tx Id</StyledTableCell>
-                            <StyledTableCell>Source</StyledTableCell>
-                            <StyledTableCell>Destination</StyledTableCell>
-                            <StyledTableCell align={"right"}>Amount</StyledTableCell>
-                            <StyledTableCell>Currency</StyledTableCell>
-                            <StyledTableCell>Title</StyledTableCell>
-                            <StyledTableCell>Timestamp</StyledTableCell>
-                            <StyledTableCell>Status</StyledTableCell>
-                            <StyledTableCell> </StyledTableCell>
-                            <StyledTableCell> </StyledTableCell>
+                            <TableCell>Tx Id</TableCell>
+                            <TableCell>Source</TableCell>
+                            <TableCell>Destination</TableCell>
+                            <TableCell align={"right"}>Amount</TableCell>
+                            <TableCell>Currency</TableCell>
+                            <TableCell>Title</TableCell>
+                            <TableCell>Timestamp</TableCell>
+                            <TableCell>Status</TableCell>
+                            <TableCell> </TableCell>
+                            <TableCell> </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -103,26 +106,26 @@ class ListTransfersComponent extends Component {
                             this.state.transfers && this.state.transfers.map(
                                 transfer =>
                                     <StyledTableRow key={transfer.id}>
-                                        <StyledTableCell align="left" component="th" scope="row">
+                                        <TableCell variant={"head"} align="left" component="th" scope="row">
                                             {transfer.id}
-                                        </StyledTableCell>
-                                        <StyledTableCell align="left">{transfer.source}</StyledTableCell>
-                                        <StyledTableCell align="left">{transfer.destination}</StyledTableCell>
-                                        <StyledTableCell align="right">{transfer.amount}</StyledTableCell>
-                                        <StyledTableCell>{transfer.currency}</StyledTableCell>
-                                        <StyledTableCell align="left">{transfer.title}</StyledTableCell>
-                                        <StyledTableCell align="left">{transfer.timestamp}</StyledTableCell>
-                                        <StyledTableCell align="left">{transfer.status}</StyledTableCell>
-                                        <StyledTableCell align="right">
+                                        </TableCell>
+                                        <TableCell variant={"head"} align="left">{transfer.source}</TableCell>
+                                        <TableCell variant={"head"} align="left">{transfer.destination}</TableCell>
+                                        <TableCell variant={"head"} align="right">{transfer.amount}</TableCell>
+                                        <TableCell variant={"head"}>{transfer.currency}</TableCell>
+                                        <TableCell variant={"head"} align="left">{transfer.title}</TableCell>
+                                        <TableCell variant={"head"} align="left">{transfer.timestamp}</TableCell>
+                                        <TableCell variant={"head"} align="left">{transfer.status}</TableCell>
+                                        <TableCell variant={"head"} align="right">
                                             <Button size="small" disabled={transfer.status !== "PENDING"}
                                                     variant="contained" color="primary"
                                                     onClick={() => this.executeTransfer(transfer.id)}>Execute</Button>
-                                        </StyledTableCell>
-                                        <StyledTableCell align="right">
+                                        </TableCell>
+                                        <TableCell variant={"head"} align="right">
                                             <Button size="small" disabled={transfer.status !== "PENDING"}
                                                     variant="contained" color="secondary"
                                                     onClick={() => this.cancelTransfer(transfer.id)}>Cancel</Button>
-                                        </StyledTableCell>
+                                        </TableCell>
                                     </StyledTableRow>
                             )
                         }
@@ -137,7 +140,7 @@ class ListTransfersComponent extends Component {
 
 const style = {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'left'
 }
 
 export default ListTransfersComponent;

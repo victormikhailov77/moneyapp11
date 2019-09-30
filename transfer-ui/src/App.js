@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import './App.css';
 
 import AppRouter from "./component/RouterComponent";
@@ -7,12 +7,10 @@ import Container from '@material-ui/core/Container';
 
 function App() {
     return (
-        <div>
+        <Fragment>
             <NavBar/>
-            <Container>
-                <AppRouter/>
-            </Container>
-        </div>
+            <AppRouter/>
+        </Fragment>
     );
 }
 
