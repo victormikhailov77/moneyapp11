@@ -63,17 +63,17 @@ class ListTransfersComponent extends Component {
     cancelTransfer(id) {
         ApiService.cancelTransfer(id)
             .then(res => {
+                this.reloadTransferList();
                 this.setState({message: 'Transfer cancelled successfully.'});
             });
-        this.forceUpdate();
     }
 
     executeTransfer(id) {
         ApiService.executeTransfer(id)
             .then(res => {
+                this.reloadTransferList();
                 this.setState({message: 'Transfer completed successfully.'});
             });
-        this.forceUpdate();
     }
 
     createTransfer() {
