@@ -26,7 +26,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @EnableWebSecurity
 @EnableResourceServer
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 @ConditionalOnProperty(prefix = "rest.security", value = "enabled", havingValue = "true")
 @Import({SecurityProperties.class})
 public class SecurityConfigurer extends ResourceServerConfigurerAdapter {
