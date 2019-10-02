@@ -45,7 +45,7 @@ class ListTransfersComponent extends Component {
     }
 
     componentDidMount() {
-        this.interval = setInterval(this.reloadTransferList, 5000);
+        //this.interval = setInterval(this.reloadTransferList, 10000);
         this.reloadTransferList();
     }
 

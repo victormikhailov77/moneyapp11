@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
@@ -26,7 +27,7 @@ public class TransferResource {
     private TransferService transferService;
 
     @RequestMapping(method= RequestMethod.POST)
-    @Secured("ROLE_USER")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER')")
     public ResponseEntity<Transfer> createTransfer(@RequestBody TransferDto dto) {
 
         Transfer result = transferService.createTransfer(dto);
@@ -34,13 +35,13 @@ public class TransferResource {
     }
 
     @RequestMapping(method = RequestMethod.GET, value="{id}")
-    @Secured("ROLE_USER")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER')")
     public ResponseEntity<Transfer> getTransferById(@PathVariable("id") String id) {
         return new ResponseEntity(transferService.getTransferDetails(id), HttpStatus.OK);
     }
-//
+
     @RequestMapping(method = RequestMethod.GET)
-    @Secured("ROLE_USER")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER')")
     public ResponseEntity<List> getAllTransfers(@RequestParam(name = "source", required=false) String source, @RequestParam(name = "destination", required=false) String destination,
                 @RequestParam(name = "title", required=false) String title, @RequestParam(name = "currency", required=false) String currency, @RequestParam(name = "amount", required=false) String amount,
                 @RequestParam(name = "status", required=false) String status, @RequestParam(name = "order", required=false) String order, @RequestParam(name = "sort", required=false) String sort, @RequestParam(name = "limit", required=false) String limit) {
@@ -58,13 +59,13 @@ public class TransferResource {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value="{id}")
-    @Secured("ROLE_ADMIN")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER')")
     public ResponseEntity<Transfer> executeTransfer(@PathVariable("id") String id) {
         return updateOperationTemplate(id, transferService::executeTransfer);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value="{id}")
-    @Secured("ROLE_ADMIN")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER')")
     public ResponseEntity<Transfer> cancelTransfer(@PathVariable("id") String id) {
         return updateOperationTemplate(id, transferService::cancelTransfer);
     }
